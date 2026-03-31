@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>ЦКК — Специальный технический портал</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0f0a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #eef4e0;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .bg-tech {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, #0f1f0f, #010301);
+            z-index: -2;
+        }
+        .bg-tech::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.08"><path fill="none" stroke="%23ffd966" stroke-width="0.5" d="M10 10 L90 10 M10 20 L90 20 M10 30 L90 30 M10 40 L90 40 M10 50 L90 50 M10 60 L90 60 M10 70 L90 70 M10 80 L90 80 M10 90 L90 90 M20 10 L20 90 M30 10 L30 90 M40 10 L40 90 M50 10 L50 90 M60 10 L60 90 M70 10 L70 90 M80 10 L80 90"/></svg>');
+            background-repeat: repeat;
+            background-size: 40px;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* header тех-стиль */
+        .tech-header {
+            background: rgba(10, 20, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #3a6e3a;
+            box-shadow: 0 0 12px rgba(255,217,102,0.2);
+        }
+
+        .logo-tech {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-tech h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c9e06b, #ffd966);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .badge-tech {
+            background: #1a3a1a;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-family: monospace;
+            color: #ffd966;
+            border: 1px solid #5a8a5a;
+        }
+
+        .sub {
+            margin-top: 0.6rem;
+            font-size: 0.8rem;
+            color: #bbaa77;
+            font-family: monospace;
+        }
+
+        /* технический текст — основной блок */
+        .tech-paper {
+            background: rgba(15, 25, 15, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #ffd966;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .tech-paper h2 {
+            color: #ffd966;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            border-bottom: 1px dashed #6a8a5a;
+            display: inline-block;
+            padding-bottom: 0.2rem;
+        }
+
+        .tech-paper p {
+            margin-bottom: 1rem;
+            line-height: 1.55;
+            font-size: 0.95rem;
+        }
+
+        .code-snippet {
+            background: #0a120a;
+            padding: 0.8rem;
+            border-radius: 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            margin: 1rem 0;
+            border-left: 3px solid #ffd966;
+            overflow-x: auto;
+            color: #cce6b0;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0 1rem;
+            justify-content: center;
+        }
+
+        .tech-btn {
+            background: linear-gradient(145deg, #2a4a2a, #1a2a1a);
+            border: 1px solid #ffd966;
+            color: #ffd966;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .tech-btn:hover {
+            background: #ffd966;
+            color: #0a2a0a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(255,217,102,0.3);
+        }
+
+        .specs-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .spec-card {
+            background: #0f1f0f;
+            border-radius: 20px;
+            padding: 0.8rem;
+            flex: 1;
+            min-width: 160px;
+            border: 1px solid #3a6a3a;
+        }
+
+        .spec-card span {
+            color: #ffd966;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.7rem;
+            color: #7a9a6a;
+            border-top: 1px solid #2a4a2a;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            .tech-paper { padding: 1.2rem; }
+            .tech-btn { padding: 0.5rem 1rem; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="bg-tech"></div>
+<div class="container">
+    <div class="tech-header">
+        <div class="logo-tech">
+            <h1>⚙️ ЦКК | СПЕЦИАЛЬНЫЙ ТЕХНИЧЕСКИЙ ПОРТАЛ</h1>
+            <div class="badge-tech">v.2.4.1 | ЗАЩИЩЁННЫЙ КАНАЛ | МЧС-ТЕХ</div>
+        </div>
+        <div class="sub">🔒 Служебная техническая документация • Инфраструктура мониторинга • Протоколы экстренного оповещения</div>
+    </div>
+
+    <!-- ОСНОВНОЙ ТЕХНИЧЕСКИЙ ТЕКСТ (большой, без ссылок) -->
+    <div class="tech-paper">
+        <h2>📡 СТРУКТУРА ТЕХНИЧЕСКОЙ ИНФРАСТРУКТУРЫ ЦКК</h2>
+        <p>Центральный канал Котоградской области (ЦКК) функционирует как распределённая система защищённой связи, объединяющая узлы мониторинга нечисти, модули акустической обороны и серверы криптографического подтверждения личности операторов. Техническая архитектура базируется на трёхуровневой модели: <strong>периметр (Антиуирры)</strong>, <strong>зона ответственности МЧС (Профиуирры и гитарный контроль)</strong> и <strong>цифровая инфраструктура ЦКК (архивация, шифрование, Линзеваторы)</strong>. Ниже приведены детальные технические спецификации текущего развёртывания.</p>
+
+        <div class="code-snippet">
+            &gt; systemctl status ckk-core<br>
+            ● ckk-core.service — Центральный узел связи<br>
+            &nbsp;&nbsp;Active: active (running) since 2026-03-31 09:42:17 MSK<br>
+            &nbsp;&nbsp;Main PID: 1427 (ckk_daemon)<br>
+            &nbsp;&nbsp;Tasks: 24 (limit: 512)<br>
+            &nbsp;&nbsp;Memory: 412.8M (peak 608M)<br>
+            &nbsp;&nbsp;CGroup: /system.slice/ckk-core.service<br>
+            &nbsp;&nbsp;├─1427 /usr/local/ckk/bin/daemon --listen 0.0.0.0:5555 --tls<br>
+            &nbsp;&nbsp;├─1442 ckk_alert_handler (monitor) – активность Уирров: низкая<br>
+            &nbsp;&nbsp;└─1501 ckk_linsevatord – темп. -15°C, яйца 50543, вылупление 25 мин
+        </div>
+
+        <h2>🛡️ АКУСТИЧЕСКАЯ ЗАЩИТА И СТРОЙ NJS-ROCK</h2>
+        <p>Технический отдел ЦКК разработал и внедрил систему активного подавления материи «В» на основе акустического резонанса. Основной элемент — строй NJS-ROCK, который использует сверхнизкие частоты (диапазон 20–45 Гц) для дестабилизации структуры ДПУ-части. Генерация осуществляется через модифицированные нейлоновые струны с адаптивным демпфированием. Каждая гитара, прошедшая сертификацию, оснащается чипом контроля высоты струн с точностью до 0,01 полутона. Интеграция с центральным узлом ЦКК позволяет в реальном времени отслеживать спектральную плотность мощности защитного поля. В случае аномального повышения радиоактивного фона модуль «Бери шинель» автоматически повышает амплитуду сигнала на 12 дБ, что приводит к распаду ЛСГ-части в радиусе до 150 метров.</p>
+
+        <div class="code-snippet">
+            // Псевдокод активации аварийного протокола<br>
+            if (detect_uirr_proximity() > THRESHOLD_CRITICAL) {<br>
+            &nbsp;&nbsp;activate_acoustic_shield("beri_shinel.mp4", gain=+12);<br>
+            &nbsp;&nbsp;send_alert("MCHS", "Антиуирры: полная мощность");<br>
+            &nbsp;&nbsp;deploy_profiuirr_squad();<br>
+            }
+        </div>
+
+        <h2>🧬 ЛИНЗЕВАТОР И БИОТЕХНИЧЕСКАЯ ЛАБОРАТОРИЯ</h2>
+        <p>Линзеватор (сертификат МЧС № 23-А/26) представляет собой криогенную камеру с поддержанием температуры -15°C ±0,5°C, внутри которой происходит контролируемая инкубация яиц Леганофилоуирра. Процесс управляется алгоритмом нейросетевого прогнозирования стабильности материи «В». За последние 72 часа лаборатория ЦКК произвела выведение 50 543 особей Уиррчика. Каждая особь проходит обязательное сканирование на наличие ДПУ-части и калибровку Флагомарета (голосового интерфейса). Инкубационный цикл сокращён до 25 минут за счёт применения высокочастотной импульсной заморозки и фоновой трансляции оригинальных записей Гр.Об. Параллельно ведутся работы над модификацией Антиуирров — стационарных модулей с круговой диаграммой направленности звука, исключающей мёртвые зоны. На данный момент все 16 периметральных установок (по 4 на каждый населённый пункт) переведены в режим усиленной защиты с использованием материала JK+7P (Виносовиконасиновынастяегораблин).</p>
+
+        <div class="specs-grid">
+            <div class="spec-card"><span>🔋 Энергопотребление</span><br>Антиуирры: 220 В / 80 Вт<br>Линзеватор: 380 В / 1.2 кВт</div>
+            <div class="spec-card"><span>📡 Каналы связи</span><br>ЦКК-шина: 128 бит AES-GCM<br>Резерв: LoRa + спутник</div>
+            <div class="spec-card"><span>⚙️ Версия прошивки</span><br>ckk-firmware 3.2.1<br>MCHS-auth 2.7</div>
+        </div>
+
+        <h2>📊 МОНИТОРИНГ НЕЧИСТИ И ПРОТИВОДЕЙСТВИЕ</h2>
+        <p>Система раннего оповещения базируется на распределённой сети Уиррчиков (Леганофилоуирров), которые выступают в роли сенсоров материи «В». Каждый Уиррчик передаёт телеметрию на центральный сервер ЦКК каждые 30 секунд. При обнаружении дикого Уирра или аномальной активности фиггилов автоматически формируется задача для мобильной группы МЧС. Параллельно активируется эшелонированная защита: сначала локальный акустический щит (NJS-ROCK), затем подключение Профиуирров и, в случае критической угрозы, полная эвакуация гражданских лиц в защищённые сектора. Технический отдел также разрабатывает протокол «Чистое небо» для быстрого восстановления Антиуирров после возможных атак. Все журналы событий хранятся в распределённом реестре с тройным резервированием.</p>
+
+        <div class="code-snippet">
+            &gt; ckk-cli --query "uirr_activity last 24h"<br>
+            Результат: зафиксировано 0 проникновений. 3 попытки обхода периметра – отклонены.<br>
+            Профиуирры: 47 патрульных смен. Антиуирры: все активны.<br>
+            ⚡ NJS-ROCK coverage: 99.97% территории области.
+        </div>
+
+        <h2>🛠️ КРИПТОГРАФИЧЕСКАЯ ЗАЩИТА И АУТЕНТИФИКАЦИЯ</h2>
+        <p>Доступ к служебно-техническому порталу и каналам связи ЦКК осуществляется строго по протоколу двухфакторной аутентификации с использованием аппаратных токенов МЧС. Все сообщения между оперативными группами шифруются по стандарту ГОСТ Р 34.10-2026 с длиной ключа 512 бит. Сеансовые ключи обновляются каждые 12 часов. Для предотвращения атак со стороны фиггилов (псионическое воздействие) используется постоянное фоновое воспроизведение оригинальных записей Егора Летова с маскировкой шума. Технический отдел также обеспечивает непрерывную работу резервных каналов через мессенджер MAX (только для дублирования некритичной информации, согласно директиве МЧС № 12-П). Внутренняя сеть изолирована от внешних интерфейсов и проходит еженесячный аудит безопасности.</p>
+        <p>Все сотрудники технического блока проходят обязательную аттестацию по работе с Линзеватором, проверке гитар на Гитарника и калибровке строя NJS-ROCK. Допускается удалённое взаимодействие через защищённые терминалы ЦКК. Ведётся постоянный лог действий, доступный для просмотра только начальнику оперативного штаба (Егор Барков Михайлович) и уполномоченным лицам МЧС.</p>
+    </div>
+
+    <!-- ДВЕ ТЕХНИЧЕСКИЕ КНОПКИ (ведут на заданные ссылки) -->
+    <div class="button-group">
+        <button id="techMchsBtn" class="tech-btn">🚒 ТЕХНИЧЕСКАЯ МЧС</button>
+        <button id="techCkkBtn" class="tech-btn">⚙️ ТЕХНИЧЕСКАЯ ЦКК</button>
+    </div>
+
+    <footer>
+        ⚡ ЦКК — служебно-технический портал | Данные актуальны на момент сеанса | Всё идёт по плану ⚡
+    </footer>
+</div>
+
+<script>
+    // ссылки согласно заданию
+    const MCHS_TECH_URL = "https://t.me/+ozkNEDHGVes2Nzdi";
+    const CKK_TECH_URL = "https://t.me/+uYaUZi2txEgxZDQy";
+
+    document.getElementById('techMchsBtn').addEventListener('click', () => {
+        window.open(MCHS_TECH_URL, '_blank');
+    });
+
+    document.getElementById('techCkkBtn').addEventListener('click', () => {
+        window.open(CKK_TECH_URL, '_blank');
+    });
+</script>
+</body>
+</html>
